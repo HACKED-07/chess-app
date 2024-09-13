@@ -1,4 +1,5 @@
-"use client"
+'use client'
+
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
 
@@ -160,7 +161,7 @@ const getPiece = (piece: string, color: "white" | "black") => {
   }
 }
 
-export default function Component() {
+export function ChessBoardComponent() {
   const [board, setBoard] = useState(initialBoard)
 
   const resetBoard = () => {
@@ -169,14 +170,15 @@ export default function Component() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-      <div className="bg-white p-6 rounded-lg shadow-lg">
-        <div className="grid grid-cols-8 gap-0 mb-4">
+      <h1 className="text-3xl font-bold mb-4">Chess Board</h1>
+      <div className="bg-white p-4 rounded-lg shadow-lg">
+        <div className="grid grid-cols-8 gap-0 w-full max-w-[600px] aspect-square">
           {board.map((row, rowIndex) =>
             row.map((piece, colIndex) => (
               <div
                 key={`${rowIndex}-${colIndex}`}
-                className={`w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center ${
-                  (rowIndex + colIndex) % 2 === 0 ? "bg-orange-200" : "bg-orange-400"
+                className={`flex items-center justify-center w-full aspect-square ${
+                  (rowIndex + colIndex) % 2 === 0 ? "bg-amber-200" : "bg-amber-800"
                 }`}
               >
                 {getPiece(piece, piece === piece.toUpperCase() ? "white" : "black")}
@@ -184,10 +186,10 @@ export default function Component() {
             ))
           )}
         </div>
-        <div className="flex justify-center">
-          <Button onClick={resetBoard}>Reset Board</Button>
-        </div>
       </div>
+      <Button onClick={resetBoard} className="mt-4">
+        Reset Board
+      </Button>
     </div>
   )
 }
